@@ -1,3 +1,21 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @Junior2143
+ Sign out
+ Watch 0
+  Star 0  Fork 0 Junior2143/SousPartPS
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
+Branch: master Find file Copy pathSousPartPS/SousPartPS.sh
+7bbe544  3 days ago
+@Junior2143 Junior2143 Create SousPartPS.sh
+1 contributor
+RawBlameHistory     
+396 lines (387 sloc)  13.8 KB
 #!/bin/bash
 clear
 clear
@@ -135,7 +153,6 @@ fi
 }
 banner () {
 echo -e "\033[01;36m
-
  _____   _____   _____    _   _____   _____  
 /  ___/ /  ___| |  _  \  | | |  _  \ |_   _| 
 | |___  | |     | |_| |  | | | |_| |   | |   
@@ -146,7 +163,6 @@ echo -e "\033[01;36m
 (__| |_, (__/_ |  )  ) (__| __)  __)  (__) |  ) 
  __/                      |                       
         \033[01;31m CRIADO: @GlEmYsSoN | Algumas Pequenas Modificações : @lathand\033[0m
-
 "
 }
 banner
@@ -254,18 +270,18 @@ if [[ -f /etc/proxy-socks/info-users/$user ]]; then
 senha=$(cat /etc/proxy-socks/info-users/$user|awk  -F : {'print $2'})
 data=$(cat /etc/proxy-socks/info-users/$user|awk -F : {'print $3'})
 echo -ne "$am"
-printf '%-14s%-9s%-15s%s\n' "$user" "$senha" "$data" "$(ps -u $user |grep sshd |wc -l)"
+printf '%-14s%-9s%-15s%s\n' "$user" "$senha" "$data" "$limiteuser" "$(ps -u $user |grep sshd |wc -l)"
 echo -ne "$b"
 else
 echo -ne "$am"
 data=null
 senha=null
-printf '%-14s%-12s%-12s%s\n' "$user" "$senha" "$data" "$(ps -u $user |grep sshd |wc -l)"
+printf '%-14s%-12s%-12s%s\n' "$user" "$senha" "$data" "$limiteuser" "$(ps -u $user |grep sshd |wc -l)"
 echo -ne "$b"
 fi
 echo -e "$b-----------------------------------------------"
 done
-read -p "Enter continuar..." enter
+read -p "Enter..." enter
 clear
 main
 fi
@@ -282,6 +298,7 @@ fi
      read -p "Data: " data
      validade=$(date '+%C%y/%m/%d' -d " +$data days")
      validadebr=$(date '+%d/%m/%C%y' -d " +$data days")
+	 limite $name $limiteuser
      echo -e "Criando usuario $nome..."
      useradd -M -N -s /bin/false $nome -e $validade
      (echo "$senha";echo "$senha")|passwd $nome 1>/dev/null 2>/dev/null
@@ -292,7 +309,8 @@ fi
      echo -e "\033[93mUsuario: $v$nome"
      echo -e "\033[93mSenha: $v$senha"
      echo -e "\033[93mData: $v$validadebr$b"
-     echo "$nome:$senha:$validadebr" > /etc/proxy-socks/info-users/$nome
+	 echo -e "\033[1;32mLimite de logins simultaneos:\033[0;37m"; read -p " " limiteuser
+     echo "$nome:$senha:$validadebr:$limiteuser" > /etc/proxy-socks/info-users/$nome
      read -p "Enter continuar..." enter 
      clear
      main
@@ -393,3 +411,15 @@ fi
 done
 }
 main
+© 2017 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About
