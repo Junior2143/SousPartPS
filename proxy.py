@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 # -*- coding: utf-8 -*-
-# Atualizado: 15/11/2017
 
 from pprint import pprint
 import sys
@@ -21,7 +20,7 @@ import subprocess
 subprocess.call("clear",shell=True)
 
 server = "127.0.0.1"
-msg1 = 'SOCKET OK'
+msg1 = 'SOCKS'
 msg2 = 'Erro, Proxy nao eh publico'
 class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
 
@@ -81,7 +80,7 @@ class SimpleHTTPProxyHandler(BaseHTTPRequestHandler):
         keep_connection = True
         while keep_connection:
             if not server.find(hostip) != -1:
-                self.send_error(403, ms2)
+                self.send_error(403, msg2)
                 self.close_connection
             keep_connection = False
             rlist, wlist, xlist = select.select(conns, [], conns, self.timeout)
