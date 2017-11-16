@@ -12,7 +12,7 @@ am="\033[93m"
 if [ "x$(id -u)" != 'x0' ]; then
 clear
     echo -e '
-\033[01;31m O SCRIPT \033[01;32m Menu \033[01;31m DEVE SER EXECUTADO COM PERMISSOES \033[01;35m  ROOT 
+\033[01;31m O SCRIPT \033[01;32m \033[01;31m DEVE SER EXECUTADO COM PERMISSOES \033[01;35m  ROOT 
 \033[01;32m UTILIZE O COMANDO \033[01;35m sudo su \033[01;32m OU \033[01;35m login root \033[0m	
 '
 echo -e "\033[01;31m"
