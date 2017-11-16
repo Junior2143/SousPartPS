@@ -12,7 +12,7 @@ am="\033[93m"
 if [ "x$(id -u)" != 'x0' ]; then
 clear
     echo -e '
-\033[01;31m O SCRIPT \033[01;32m \033[01;31m DEVE SER EXECUTADO COM PERMISSOES \033[01;35m  ROOT 
+\033[01;31m O SCRIPT \033[01;32m Menu \033[01;31m DEVE SER EXECUTADO COM PERMISSOES \033[01;35m  ROOT 
 \033[01;32m UTILIZE O COMANDO \033[01;35m sudo su \033[01;32m OU \033[01;35m login root \033[0m	
 '
 echo -e "\033[01;31m"
@@ -63,7 +63,7 @@ if [[ -d /etc/proxy-socks ]]; then
  else
  echo -e "\033[01;31m ✔ Instalando proxy-socks..."
  apt-get update 1>/dev/null 2>/dev/null
-  wget -qO- /dev/null https://raw.githubusercontent.com/borges1k6/PythonManager/master/proxy.py > /etc/proxy-socks/proxy.py
+  wget -qO- /dev/null https://raw.githubusercontent.com/Junior2143/SousPartPS/master/proxy.py > /etc/proxy-socks/proxy.py
   sleep 1
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 echo -e "\033[01;32m"
@@ -92,7 +92,7 @@ else
 echo -e "\033[01;32m ✔ Instalando proxy-socks..."
 apt-get update 1>/dev/null 2>/dev/null
 mkdir /etc/proxy-socks
-wget -qO- /dev/null https://raw.githubusercontent.com/borges1k6/PythonManager/master/proxy.py> /etc/proxy-socks/proxy.py
+wget -qO- /dev/null https://raw.githubusercontent.com/Junior2143/SousPartPS/master/proxy.py> /etc/proxy-socks/proxy.py
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 echo -e "\033[01;32m"
 read -p "Confirme seu IP: " -e -i $IP IP
