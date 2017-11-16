@@ -1,7 +1,5 @@
 #!/bin/bash
-# Atualizado: 14/11/2017
-# HTTP SOCKS PROXY
-# 
+# ATUALIZADO: 15/11/2017
 if readlink /proc/$$/exe | grep -qs "dash"; then
 	echo -e "O script e necessario rodar com bash, nao com sh"
 	exit 1
@@ -10,7 +8,7 @@ fi
 if [ "x$(id -u)" != 'x0' ]; then
 clear
     echo -e '
-\033[01;31m O SCRIPT \033[01;32m \033[01;31m DEVE SER EXECUTADO COM PERMISSOES \033[01;35m  ROOT 
+\033[01;31m O SCRIPT \033[01;32m INJECT \033[01;31m DEVE SER EXECUTADO COM PERMISSOES \033[01;35m  ROOT 
 \033[01;32m UTILIZE O COMANDO \033[01;35m sudo su \033[01;32m OU \033[01;35m login root \033[0m	
 '
 echo -e "\033[01;31m"
@@ -31,55 +29,56 @@ clear
 echo -e "
 ---------\033[37m[\033[01;32mINSTALATION\033[37m]---------
 \033[31m ❞ ACEITANDO A INSTALAÇAO VOCE ESTARA ACEITANDO: ❞
-
 \033[32m ✔ →  A RECONFIGURAÇAO COMPLETA DO SQUID3
 \033[32m ✔ →  A INSTALAÇAO DO SISTEMA HTTP - SOCKS
 \033[32m ✔ →  A RETRIÇAO AO USO DE PAYLOAD CONVENCIONAIS \033[0m
-
 ---------\033[37m[\033[01;32mINSTALATION\033[37m]--------- \033[0m "
 
 echo -e "\033[01;35m"
-read -p "CONTINUAR INSTALAÇAO [S/N] " option
+read -p "CONTINUAR INSTALAÇAO [sim - nao] " option
 echo -e "\033[0m"
 
-if [[ "$option" = "S" ]]; then
+if [[ "$option" = "sim" ]]; then
        clear
+       echo -e "\033[01;33m[+] Aguarde A atualizaçao de pacotes"
+       apt-get update -y >/dev/null 
+       apt-get upgrade -y >/dev/null
        pacote=$(dpkg --get-selections | grep squid3 )
        pacote2=$(dpkg --get-selections | grep screen )
        pacote3=$(dpkg --get-selections | grep python )
        apt-get purge squid3 -y &>/dev/null
        rm -rf /etc/squid3
        if [ -n "$pacote" ] ; then 
-           echo -e "\033[01;32m SQUID3 ✔ \033[0m "
+           echo -e "\033[01;33m SQUID3 ✔ \033[0m "
        else
-           apt-get install squid3 > /dev/null
-           echo -e "\033[01;32m SQUID3 ✔ \033[0m "
+           apt-get install squid3 -y &>/dev/null
+           echo -e "\033[01;33m SQUID3 ✔ \033[0m "
        fi
        if [ -n "$pacote2" ] ; then 
-           echo -e "\033[01;32m screen ✔ \033[0m "
+           echo -e "\033[01;33m screen ✔ \033[0m "
        else
-           apt-get install screen > /dev/null
-           echo -e "\033[01;32m screen ✔ \033[0m "
+           apt-get install screen -y &>/dev/null
+           echo -e "\033[01;33m screen ✔ \033[0m "
        fi
        if [ -n "$pacote3" ] ; then 
-           echo -e "\033[01;32m python ✔ \033[0m "
+           echo -e "\033[01;33m python ✔ \033[0m "
        else
-           apt-get install python > /dev/null
-           echo -e "\033[01;32m python ✔ \033[0m"
+           apt-get install python -y &>/dev/null
+           echo -e "\033[01;33m python ✔ \033[0m"
        fi
-           rm /bin/Menu &>/dev/null
+           rm /bin/inject &>/dev/null
            rm -rf /etc/proxy-socks/info-users &>/dev/null
            rm -rf /etc/proxy-socks &>/dev/null
-           wget -O /bin/Menu -o /dev/null https://raw.githubusercontent.com/Junior2143/SousPartPS/master/SousPartPS.sh
-           chmod +x /bin/Menu
+           wget -O /bin/inject -o /dev/null https://raw.githubusercontent.com/Junior2143/SousPartPS/master/SousPartPS.sh
+           chmod +x /bin/inject
 			 sleep 3
 			 clear
-			 echo -e "\033[01;32mCOMANDO PARA USO : \033[01;31m  Menu \033[01;32m"
-			 read -p "INSTALADO COM SUCESSO [aperte enter para continuar] : " enter
+			 echo -e "\033[01;33m[+] COMANDO PARA USO : \033[01;32m  inject \033[01;33m"
+			 read -p "[+] instalador com sucesso , aperte enter para continuar... " enter
 			 echo -e "\033[0m"
 			 clear
 fi
-if [[ "$option" = "N" ]]; then
+if [[ "$option" = "nao" ]]; then
    clear
    echo -e "
 	 \033[01;31m INSTALAÇAO CANCELADA [...] \033[0m
